@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\CardAllowed;
+use App\Rules\HandChecker;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PlayGameRequest extends FormRequest
@@ -16,7 +16,7 @@ class PlayGameRequest extends FormRequest
     {
         return [
             'name' => 'string|max:100|required',
-            'hand' => ['array', 'required', new CardAllowed],
+            'hand' => ['array', 'required', new HandChecker],
         ];
     }
 }
