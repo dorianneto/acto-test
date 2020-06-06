@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PlayGameRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
@@ -12,12 +12,7 @@ class GameController extends Controller
         return new JsonResponse();
     }
 
-    public function new(Request $request): JsonResponse
-    {
-        return new JsonResponse();
-    }
-
-    public function play(Request $request): JsonResponse
+    public function play(PlayGameRequest $request): JsonResponse
     {
         return new JsonResponse();
     }
