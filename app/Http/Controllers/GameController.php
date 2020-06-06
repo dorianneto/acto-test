@@ -34,7 +34,7 @@ class GameController extends Controller
 
     public function leadboard(): JsonResponse
     {
-        return new JsonResponse();
+        return new JsonResponse($this->matchService->leadboard());
     }
 
     public function play(PlayGameRequest $request): JsonResponse

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Result;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -32,5 +33,21 @@ class ResultRepository
         DB::commit();
 
         return $save;
+    }
+
+    public function leadboard(): ?Collection
+    {
+        try {
+            return $this->model
+                ->selectRaw('
+                    name,
+                    CAST(COUNT(id) as UNSIGNED) as total_matches,
+                    CAST(SUM(user_win) as UNSIGNED) as total_wins
+                ')
+                ->groupBy('name')
+                ->get();
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 }

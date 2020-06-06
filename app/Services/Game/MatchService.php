@@ -20,4 +20,9 @@ class MatchService
     {
         $this->resultRepository->save($result);
     }
+
+    public function leadboard(): array
+    {
+        return $this->resultRepository->leadboard()->toArray() ?? [];
+    }
 }
