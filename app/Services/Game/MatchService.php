@@ -2,10 +2,22 @@
 
 namespace App\Services\Game;
 
+use App\Repositories\ResultRepository;
+
 class MatchService
 {
-    public function save(array $result): array
+    /**
+     * @var \App\Repositories\ResultRepository
+     */
+    private $resultRepository;
+
+    public function __construct(ResultRepository $resultRepository)
     {
-        return $result;
+        $this->resultRepository = $resultRepository;
+    }
+
+    public function save(array $result): void
+    {
+        $this->resultRepository->save($result);
     }
 }

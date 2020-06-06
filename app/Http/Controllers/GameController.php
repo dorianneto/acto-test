@@ -52,8 +52,13 @@ class GameController extends Controller
             'userWin' => $this->judgeService->checkUserWon($scores),
         ];
 
-        $output = $this->matchService->save($result);
+        $this->matchService->save([
+            'name' => $result['name'],
+            'user_score' => $result['scores']['user'],
+            'opponent_score' => $result['scores']['opponent'],
+            'user_win' => $result['userWin'],
+        ]);
 
-        return new JsonResponse($output);
+        return new JsonResponse($result);
     }
 }
