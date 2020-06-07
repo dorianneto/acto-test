@@ -2,7 +2,6 @@
 
 namespace App\Rules;
 
-use App\Services\Player\Hand;
 use App\Services\Player\HandService;
 use Illuminate\Contracts\Validation\Rule;
 
