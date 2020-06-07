@@ -45,7 +45,7 @@ class MatchServiceTest extends TestCase
         $resultRepositoryMock = Mockery::mock(ResultRepository::class);
 
         $service = new MatchService($resultRepositoryMock);
-        $actual = $service->create($userHand, $opponentHand);
+        $service->create($userHand, $opponentHand);
     }
 
     public function testIsSavingMatch(): void
