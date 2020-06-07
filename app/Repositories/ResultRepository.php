@@ -46,6 +46,7 @@ class ResultRepository
                 ')
                 ->groupBy('name')
                 ->orderBy('total_wins', 'desc')
+                ->orderBy('total_matches', 'desc')
                 ->get();
         } catch (\Exception $e) {
             return null;
