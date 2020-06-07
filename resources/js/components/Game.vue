@@ -7,7 +7,7 @@
         <form>
           <div class="form-group">
             <label for="exampleInputEmail1">Your name</label>
-            <input type="text" class="form-control" v-bind:class="nameFieldError" id="exampleInputEmail1" v-model="name">
+            <input type="text" class="form-control" v-bind:class="nameFieldError" id="exampleInputEmail1" v-model.trim="name">
             <div v-if="errors.name" class="invalid-feedback">
               Some errors ocurred:
               <ul>
@@ -17,7 +17,7 @@
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Hand</label>
-            <input type="text" class="form-control" v-bind:class="handFieldError" id="exampleInputPassword1" v-model="handBuilded">
+            <input type="text" class="form-control text-uppercase" v-bind:class="handFieldError" id="exampleInputPassword1" v-model.trim="handBuilded">
             <div v-if="errors.hand" class="invalid-feedback">
               Some errors ocurred:
               <ul>
@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div v-if="showAlert" @click="closeAlert" id="match-result-alert" class="alert alert-dismissible fade show mt-3" v-bind:class="alertMatchResult">
+    <div v-if="showAlert" id="match-result-alert" class="alert alert-dismissible fade show mt-3" v-bind:class="alertMatchResult">
       <h4 class="alert-heading">Match result:</h4>
       <ul>
         <li>Your score: {{ result.scores.user }}</li>
@@ -41,7 +41,7 @@
       <p class="mb-0" v-if="result.userWin === true">You <strong>won</strong> this match!</p>
       <p class="mb-0" v-else>You <strong>lost</strong> this match.</p>
 
-      <button type="button" class="close">
+      <button type="button" class="close" @click="closeAlert">
         <span>&times;</span>
       </button>
     </div>
@@ -63,14 +63,18 @@
       play: async function(e) {
         e.preventDefault();
 
+        const { name, hand } = this;
+
         const data = {
-          name: this.name,
-          hand: this.hand,
+          name,
+          hand: hand.map(card => card.toUpperCase())
         };
 
         await api.post('play', data)
           .then(response => {
-            this.result = response.data;
+            const { data } = response;
+
+            this.result = data;
             this.hand = [];
             this.errors = [];
             this.showAlert = true;
@@ -97,19 +101,25 @@
         }
       },
       nameFieldError: function() {
+        const { name } = this.errors;
+
         return {
-          'is-invalid': this.errors.name && this.errors.name.length > 0,
+          'is-invalid': name && name.length > 0,
         }
       },
       handFieldError: function() {
+        const { hand } = this.errors;
+
         return {
-          'is-invalid': this.errors.hand && this.errors.hand.length > 0,
+          'is-invalid': hand && hand.length > 0,
         }
       },
       alertMatchResult: function() {
+        const { userWin } = this.result;
+
         return {
-          'alert-danger': this.result.userWin === false,
-          'alert-success': this.result.userWin === true
+          'alert-danger': userWin === false,
+          'alert-success': userWin === true
         }
       }
     }

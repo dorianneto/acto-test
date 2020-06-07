@@ -2047,19 +2047,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _play = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
         var _this = this;
 
-        var data;
+        var name, hand, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 e.preventDefault();
+                name = this.name, hand = this.hand;
                 data = {
-                  name: this.name,
-                  hand: this.hand
+                  name: name,
+                  hand: hand.map(function (card) {
+                    return card.toUpperCase();
+                  })
                 };
-                _context.next = 4;
+                _context.next = 5;
                 return _services_api_js__WEBPACK_IMPORTED_MODULE_1__["default"].post('play', data).then(function (response) {
-                  _this.result = response.data;
+                  var data = response.data;
+                  _this.result = data;
                   _this.hand = [];
                   _this.errors = [];
                   _this.showAlert = true;
@@ -2070,7 +2074,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.errors = errors;
                 });
 
-              case 4:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -2098,19 +2102,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     nameFieldError: function nameFieldError() {
+      var name = this.errors.name;
       return {
-        'is-invalid': this.errors.name && this.errors.name.length > 0
+        'is-invalid': name && name.length > 0
       };
     },
     handFieldError: function handFieldError() {
+      var hand = this.errors.hand;
       return {
-        'is-invalid': this.errors.hand && this.errors.hand.length > 0
+        'is-invalid': hand && hand.length > 0
       };
     },
     alertMatchResult: function alertMatchResult() {
+      var userWin = this.result.userWin;
       return {
-        'alert-danger': this.result.userWin === false,
-        'alert-success': this.result.userWin === true
+        'alert-danger': userWin === false,
+        'alert-success': userWin === true
       };
     }
   }
@@ -39316,9 +39323,10 @@ var render = function() {
               directives: [
                 {
                   name: "model",
-                  rawName: "v-model",
+                  rawName: "v-model.trim",
                   value: _vm.name,
-                  expression: "name"
+                  expression: "name",
+                  modifiers: { trim: true }
                 }
               ],
               staticClass: "form-control",
@@ -39330,7 +39338,10 @@ var render = function() {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.name = $event.target.value
+                  _vm.name = $event.target.value.trim()
+                },
+                blur: function($event) {
+                  return _vm.$forceUpdate()
                 }
               }
             }),
@@ -39358,12 +39369,13 @@ var render = function() {
               directives: [
                 {
                   name: "model",
-                  rawName: "v-model",
+                  rawName: "v-model.trim",
                   value: _vm.handBuilded,
-                  expression: "handBuilded"
+                  expression: "handBuilded",
+                  modifiers: { trim: true }
                 }
               ],
-              staticClass: "form-control",
+              staticClass: "form-control text-uppercase",
               class: _vm.handFieldError,
               attrs: { type: "text", id: "exampleInputPassword1" },
               domProps: { value: _vm.handBuilded },
@@ -39372,7 +39384,10 @@ var render = function() {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.handBuilded = $event.target.value
+                  _vm.handBuilded = $event.target.value.trim()
+                },
+                blur: function($event) {
+                  return _vm.$forceUpdate()
                 }
               }
             }),
@@ -39414,8 +39429,7 @@ var render = function() {
           {
             staticClass: "alert alert-dismissible fade show mt-3",
             class: _vm.alertMatchResult,
-            attrs: { id: "match-result-alert" },
-            on: { click: _vm.closeAlert }
+            attrs: { id: "match-result-alert" }
           },
           [
             _c("h4", { staticClass: "alert-heading" }, [
@@ -39446,22 +39460,21 @@ var render = function() {
                   _vm._v(" this match.")
                 ]),
             _vm._v(" "),
-            _vm._m(0)
+            _c(
+              "button",
+              {
+                staticClass: "close",
+                attrs: { type: "button" },
+                on: { click: _vm.closeAlert }
+              },
+              [_c("span", [_vm._v("×")])]
+            )
           ]
         )
       : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "close", attrs: { type: "button" } }, [
-      _c("span", [_vm._v("×")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
