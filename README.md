@@ -1,4 +1,5 @@
 # acto-test
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7ca80d08811f46dd8a6943e4a6cbc1a4)](https://app.codacy.com/manual/dorianneto/acto-test?utm_source=github.com&utm_medium=referral&utm_content=dorianneto/acto-test&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/dorianneto/acto-test.svg?branch=master)](https://travis-ci.org/dorianneto/acto-test)
 
 You can access the application through this link https://acto-test.herokuapp.com/
