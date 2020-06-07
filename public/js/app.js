@@ -1938,9 +1938,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      componentKey: 0
+    };
+  },
   components: {
     Game: _Game__WEBPACK_IMPORTED_MODULE_0__["default"],
     Leadboard: _Leadboard__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  methods: {
+    onUpdateLeadboard: function onUpdateLeadboard(value) {
+      this.componentKey += 1;
+    }
   }
 });
 
@@ -2044,6 +2054,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.result = response.data;
                   _this.hand = [];
                   _this.errors = [];
+
+                  _this.$emit('update-leadboard', true);
                 })["catch"](function (error) {
                   var errors = error.response.data.errors;
                   _this.errors = errors;
@@ -38465,9 +38477,19 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-4" }, [_c("game")], 1),
+      _c(
+        "div",
+        { staticClass: "col-md-4" },
+        [_c("game", { on: { "update-leadboard": _vm.onUpdateLeadboard } })],
+        1
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-8" }, [_c("Leadboard")], 1)
+      _c(
+        "div",
+        { staticClass: "col-md-8" },
+        [_c("leadboard", { key: _vm.componentKey })],
+        1
+      )
     ])
   ])
 }

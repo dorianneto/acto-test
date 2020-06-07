@@ -72,6 +72,8 @@
             this.result = response.data;
             this.hand = [];
             this.errors = [];
+
+            this.$emit('update-leadboard', true);
           })
           .catch(error => {
             const { errors } = error.response.data;
