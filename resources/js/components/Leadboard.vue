@@ -4,7 +4,7 @@
 
     <div class="card-body">
       <table class="table">
-        <caption>Leadboard up to date at </caption>
+        <caption>Last update at {{ updatedAtFormatted }}</caption>
         <thead>
           <tr>
             <th width="15%">Rank</th>
@@ -31,7 +31,8 @@
 
   export default {
     data: () => ({
-      data: []
+      data: [],
+      updatedAt: new Date()
     }),
     mounted: async function () {
       await api.get('leadboard')
@@ -41,6 +42,18 @@
         .catch(error => {
           alert(error);
         });
+    },
+    computed: {
+      updatedAtFormatted: function() {
+        const options = {
+          year: 'numeric', month: 'numeric', day: 'numeric',
+          hour: 'numeric', minute: 'numeric', second: 'numeric',
+          hour12: true,
+          timeZone: 'America/Toronto'
+        }
+
+        return new Intl.DateTimeFormat('en-CA', options).format(this.updatedAt);
+      }
     }
   }
 </script>

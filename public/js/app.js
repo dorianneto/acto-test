@@ -2156,7 +2156,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      data: []
+      data: [],
+      updatedAt: new Date()
     };
   },
   mounted: function () {
@@ -2187,7 +2188,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
 
     return mounted;
-  }()
+  }(),
+  computed: {
+    updatedAtFormatted: function updatedAtFormatted() {
+      var options = {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true,
+        timeZone: 'America/Toronto'
+      };
+      return new Intl.DateTimeFormat('en-CA', options).format(this.updatedAt);
+    }
+  }
 });
 
 /***/ }),
@@ -38709,7 +38725,9 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
       _c("table", { staticClass: "table" }, [
-        _c("caption", [_vm._v("Leadboard up to date at ")]),
+        _c("caption", [
+          _vm._v("Last update at " + _vm._s(_vm.updatedAtFormatted))
+        ]),
         _vm._v(" "),
         _vm._m(0),
         _vm._v(" "),
