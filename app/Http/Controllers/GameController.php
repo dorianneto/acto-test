@@ -49,6 +49,10 @@ class GameController extends Controller
         $result = [
             'name' => $userName,
             'scores' => $scores,
+            'hands' => [
+                'user' => $userHand->toArray(),
+                'opponent' => $opponentHand->toArray(),
+            ],
             'userWin' => $this->judgeService->checkUserWon($scores),
         ];
 

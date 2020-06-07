@@ -2031,6 +2031,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -39438,11 +39440,23 @@ var render = function() {
             _vm._v(" "),
             _c("ul", [
               _c("li", [
-                _vm._v("Your score: " + _vm._s(_vm.result.scores.user))
+                _c("small", [_vm._v("Your hand")]),
+                _vm._v(": " + _vm._s(_vm.result.hands.user))
               ]),
               _vm._v(" "),
               _c("li", [
-                _vm._v("Opponent score: " + _vm._s(_vm.result.scores.opponent))
+                _c("small", [_vm._v("Opponent's hand")]),
+                _vm._v(": " + _vm._s(_vm.result.hands.opponent))
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("small", [_vm._v("Your score")]),
+                _vm._v(": " + _vm._s(_vm.result.scores.user))
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("small", [_vm._v("Opponent's score")]),
+                _vm._v(": " + _vm._s(_vm.result.scores.opponent))
               ])
             ]),
             _vm._v(" "),

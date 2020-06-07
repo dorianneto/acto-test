@@ -34,8 +34,10 @@
     <div v-if="showAlert" id="match-result-alert" class="alert alert-dismissible fade show mt-3" v-bind:class="alertMatchResult">
       <h4 class="alert-heading">Match result:</h4>
       <ul>
-        <li>Your score: {{ result.scores.user }}</li>
-        <li>Opponent score: {{ result.scores.opponent }}</li>
+        <li><small>Your hand</small>: {{ result.hands.user }}</li>
+        <li><small>Opponent's hand</small>: {{ result.hands.opponent }}</li>
+        <li><small>Your score</small>: {{ result.scores.user }}</li>
+        <li><small>Opponent's score</small>: {{ result.scores.opponent }}</li>
       </ul>
       <hr>
       <p class="mb-0" v-if="result.userWin === true">You <strong>won</strong> this match!</p>

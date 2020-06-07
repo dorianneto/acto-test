@@ -23,4 +23,11 @@ class Hand
     {
         return count($this->getCards());
     }
+
+    public function toArray(): array
+    {
+        return array_map(function($value) {
+            return $value->getRealValue();
+        }, $this->getCards());
+    }
 }
