@@ -44,12 +44,15 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "App\\": "tests/"
         }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "test": [
+            "@php vendor/bin/phpunit --no-coverage --color=always"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

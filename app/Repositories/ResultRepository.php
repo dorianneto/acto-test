@@ -27,7 +27,7 @@ class ResultRepository
             $save = $this->model->create($data);
         } catch (\Exception $e) {
             DB::rollBack();
-            throw new \Exception("Error Processing Request", 1);
+            throw new \Exception("An error occurred on saving match result in database");
         }
 
         DB::commit();
