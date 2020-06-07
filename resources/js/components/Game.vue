@@ -6,7 +6,7 @@
       <div class="card-body">
         <form>
           <div class="form-group">
-            <label for="exampleInputEmail1">Your name</label>
+            <label for="exampleInputEmail1">Your name*</label>
             <input type="text" class="form-control" v-bind:class="nameFieldError" id="exampleInputEmail1" v-model.trim="name">
             <div v-if="errors.name" class="invalid-feedback">
               Some errors ocurred:
@@ -16,7 +16,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Hand</label>
+            <label for="exampleInputPassword1">Hand*</label>
             <input type="text" class="form-control text-uppercase" v-bind:class="handFieldError" id="exampleInputPassword1" v-model.trim="handBuilded">
             <div v-if="errors.hand" class="invalid-feedback">
               Some errors ocurred:

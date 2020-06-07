@@ -39318,7 +39318,7 @@ var render = function() {
         _c("form", [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-              _vm._v("Your name")
+              _vm._v("Your name*")
             ]),
             _vm._v(" "),
             _c("input", {
@@ -39364,7 +39364,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-              _vm._v("Hand")
+              _vm._v("Hand*")
             ]),
             _vm._v(" "),
             _c("input", {
