@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div v-if="result" class="alert alert-dismissible fade show mt-3" v-bind:class="alertMatchResult">
+    <div v-if="showAlert" @click="closeAlert" id="match-result-alert" class="alert alert-dismissible fade show mt-3" v-bind:class="alertMatchResult">
       <h4 class="alert-heading">Match result:</h4>
       <ul>
         <li>Your score: {{ result.scores.user }}</li>
@@ -41,8 +41,8 @@
       <p class="mb-0" v-if="result.userWin === true">You <strong>won</strong> this match!</p>
       <p class="mb-0" v-else>You <strong>lost</strong> this match.</p>
 
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
+      <button type="button" class="close">
+        <span>&times;</span>
       </button>
     </div>
   </div>
@@ -57,6 +57,7 @@
       hand: [],
       errors: [],
       result: null,
+      showAlert: false
     }),
     methods: {
       play: async function(e) {
@@ -72,6 +73,7 @@
             this.result = response.data;
             this.hand = [];
             this.errors = [];
+            this.showAlert = true;
 
             this.$emit('update-leadboard', true);
           })
@@ -80,6 +82,9 @@
 
             this.errors = errors;
           });
+      },
+      closeAlert: function() {
+        this.showAlert = false;
       }
     },
     computed: {

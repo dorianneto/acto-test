@@ -2038,7 +2038,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       name: null,
       hand: [],
       errors: [],
-      result: null
+      result: null,
+      showAlert: false
     };
   },
   methods: {
@@ -2061,6 +2062,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.result = response.data;
                   _this.hand = [];
                   _this.errors = [];
+                  _this.showAlert = true;
 
                   _this.$emit('update-leadboard', true);
                 })["catch"](function (error) {
@@ -2081,7 +2083,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return play;
-    }()
+    }(),
+    closeAlert: function closeAlert() {
+      this.showAlert = false;
+    }
   },
   computed: {
     handBuilded: {
@@ -39403,12 +39408,14 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm.result
+    _vm.showAlert
       ? _c(
           "div",
           {
             staticClass: "alert alert-dismissible fade show mt-3",
-            class: _vm.alertMatchResult
+            class: _vm.alertMatchResult,
+            attrs: { id: "match-result-alert" },
+            on: { click: _vm.closeAlert }
           },
           [
             _c("h4", { staticClass: "alert-heading" }, [
@@ -39450,18 +39457,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "alert",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
+    return _c("button", { staticClass: "close", attrs: { type: "button" } }, [
+      _c("span", [_vm._v("×")])
+    ])
   }
 ]
 render._withStripped = true
