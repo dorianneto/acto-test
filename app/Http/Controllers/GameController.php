@@ -44,16 +44,24 @@ class GameController extends Controller
         $userHand = $this->handService->build($userHand);
         $opponentHand = $this->handService->generate($userHand->count());
 
-        $scores = $this->judgeService->evaluate($userHand, $opponentHand);
+        $match = $this->matchService->create($userHand, $opponentHand);
+
+        $matchEvaluated = $this->judgeService->evaluateMatch($match);
+
+        $userScore = $matchEvaluated->getUserScore();
+        $opponentScore = $matchEvaluated->getOpponentScore();
 
         $result = [
             'name' => $userName,
-            'scores' => $scores,
+            'scores' => [
+                'user' => $userScore,
+                'opponent' => $opponentScore,
+            ],
             'hands' => [
                 'user' => $userHand->toArray(),
                 'opponent' => $opponentHand->toArray(),
             ],
-            'userWin' => $this->judgeService->checkUserWon($scores),
+            'userWin' => $this->judgeService->checkUserWon($userScore, $opponentScore),
         ];
 
         $this->matchService->save([
