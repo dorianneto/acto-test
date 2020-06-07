@@ -83,7 +83,7 @@ class MatchServiceTest extends TestCase
             ->andReturn($dataFromDatabase);
 
         $service = new MatchService($resultRepositoryMock);
-        $actual = $service->leadboard($input);
+        $actual = $service->leadboard($dataFromDatabase);
 
         $this->assertIsArray($actual);
         $this->assertEquals(1, count($actual));
@@ -106,7 +106,7 @@ class MatchServiceTest extends TestCase
             ->andReturn($dataFromDatabase);
 
         $service = new MatchService($resultRepositoryMock);
-        $actual = $service->leadboard($input);
+        $actual = $service->leadboard($dataFromDatabase);
 
         $this->assertIsArray($actual);
         $this->assertEquals(0, count($actual));
