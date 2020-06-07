@@ -52083,7 +52083,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 var api = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  baseURL: 'http://localhost:8000/api/game/'
+  baseURL: '/api/game/'
 });
 /* harmony default export */ __webpack_exports__["default"] = (api);
 
