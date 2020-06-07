@@ -16,7 +16,7 @@
           </thead>
           <tbody>
             <tr v-for="(item, index) in data" :key="index">
-              <td>{{ index+1 }}</td>
+              <td><span class="badge badge-pill" v-bind:class="rankBadge(index)">{{ index+1 }}</span></td>
               <td>{{ item.name }}</td>
               <td>{{ item.total_matches }}</td>
               <td>{{ item.total_wins }}</td>
@@ -45,6 +45,25 @@
           alert(error);
         });
     },
+    methods: {
+      rankBadge: function(rank) {
+        if (rank > 2) {
+          return { 'badge-light': true }
+        }
+
+        if (rank === 0) {
+          return { 'badge-gold': true }
+        }
+
+        if (rank === 1) {
+          return { 'badge-silver': true }
+        }
+
+        if (rank === 2) {
+          return { 'badge-bronze': true }
+        }
+      }
+    },
     computed: {
       updatedAtFormatted: function() {
         const options = {
@@ -59,3 +78,19 @@
     }
   }
 </script>
+
+
+<style lang="scss">
+  .badge {
+    &.badge-gold {
+      background-color: #D6AF36;
+    }
+    &.badge-silver {
+      background-color: #A7A7AD;
+    }
+    &.badge-bronze {
+      background-color: #A77044;
+      color: #fff;
+    }
+  }
+</style>

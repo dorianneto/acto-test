@@ -38,7 +38,7 @@
   }
 </script>
 
-<stylel lang="scss">
+<style lang="scss">
   #application {
     display: flex;
     flex-direction: column;
@@ -59,4 +59,4 @@
       text-align: center;
     }
   }
-</stylel>
+</style>
