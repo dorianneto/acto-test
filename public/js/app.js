@@ -2161,44 +2161,57 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       data: [],
-      updatedAt: new Date()
+      updatedAt: new Date(),
+      loading: false,
+      showTable: true
     };
   },
-  mounted: function () {
-    var _mounted = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var _this = this;
-
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _services_api_js__WEBPACK_IMPORTED_MODULE_1__["default"].get('leadboard').then(function (response) {
-                _this.data = response.data;
-              })["catch"](function (error) {
-                alert(error);
-              });
-
-            case 2:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    function mounted() {
-      return _mounted.apply(this, arguments);
-    }
-
-    return mounted;
-  }(),
+  mounted: function mounted() {
+    this.loadLeadboard();
+  },
   methods: {
+    loadLeadboard: function () {
+      var _loadLeadboard = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _this = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.loading = true;
+                _context.next = 3;
+                return _services_api_js__WEBPACK_IMPORTED_MODULE_1__["default"].get('leadboard').then(function (response) {
+                  _this.data = response.data;
+                  _this.loading = false;
+
+                  if (response.data.length === 0) {
+                    _this.showTable = false;
+                  }
+                })["catch"](function (error) {
+                  alert(error);
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function loadLeadboard() {
+        return _loadLeadboard.apply(this, arguments);
+      }
+
+      return loadLeadboard;
+    }(),
     rankBadge: function rankBadge(rank) {
       if (rank > 2) {
         return {
@@ -39476,40 +39489,46 @@ var render = function() {
     _c("div", { staticClass: "card-header" }, [_vm._v("Leadboard")]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
-      _c("div", { staticClass: "table-responsive" }, [
-        _c("table", { staticClass: "table" }, [
-          _c("caption", [
-            _vm._v("Last update at " + _vm._s(_vm.updatedAtFormatted))
-          ]),
-          _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.data, function(item, index) {
-              return _c("tr", { key: index }, [
-                _c("td", [
+      _vm.showTable
+        ? _c("div", { staticClass: "table-responsive" }, [
+            _vm.loading
+              ? _c("p", [_vm._v("Loading...")])
+              : _c("table", { staticClass: "table" }, [
+                  _c("caption", [
+                    _vm._v("Last update at " + _vm._s(_vm.updatedAtFormatted))
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0),
+                  _vm._v(" "),
                   _c(
-                    "span",
-                    {
-                      staticClass: "badge badge-pill",
-                      class: _vm.rankBadge(index)
-                    },
-                    [_vm._v(_vm._s(index + 1))]
+                    "tbody",
+                    _vm._l(_vm.data, function(item, index) {
+                      return _c("tr", { key: index }, [
+                        _c("td", [
+                          _c(
+                            "span",
+                            {
+                              staticClass: "badge badge-pill",
+                              class: _vm.rankBadge(index)
+                            },
+                            [_vm._v(_vm._s(index + 1))]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.name))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.total_matches))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.total_wins))])
+                      ])
+                    }),
+                    0
                   )
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(item.name))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(item.total_matches))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(item.total_wins))])
-              ])
-            }),
-            0
-          )
-        ])
-      ])
+                ])
+          ])
+        : _c("p", [
+            _vm._v("There isn't data enough to build a leaderboard yet.")
+          ])
     ])
   ])
 }

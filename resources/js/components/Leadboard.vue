@@ -3,8 +3,9 @@
     <div class="card-header">Leadboard</div>
 
     <div class="card-body">
-      <div class="table-responsive">
-        <table class="table">
+      <div class="table-responsive" v-if="showTable">
+        <p v-if="loading">Loading...</p>
+        <table class="table" v-else>
           <caption>Last update at {{ updatedAtFormatted }}</caption>
           <thead>
             <tr>
@@ -24,6 +25,7 @@
           </tbody>
         </table>
       </div>
+      <p v-else>There isn't data enough to build a leaderboard yet.</p>
     </div>
   </div>
 </template>
@@ -34,18 +36,30 @@
   export default {
     data: () => ({
       data: [],
-      updatedAt: new Date()
+      updatedAt: new Date(),
+      loading: false,
+      showTable: true,
     }),
-    mounted: async function () {
-      await api.get('leadboard')
-        .then(response => {
-          this.data = response.data;
-        })
-        .catch(error => {
-          alert(error);
-        });
+    mounted: function () {
+      this.loadLeadboard();
     },
     methods: {
+      loadLeadboard: async function() {
+        this.loading = true;
+
+        await api.get('leadboard')
+          .then(response => {
+            this.data = response.data;
+            this.loading = false;
+
+            if (response.data.length === 0) {
+              this.showTable = false;
+            }
+          })
+          .catch(error => {
+            alert(error);
+          });
+      },
       rankBadge: function(rank) {
         if (rank > 2) {
           return { 'badge-light': true }
@@ -78,7 +92,6 @@
     }
   }
 </script>
-
 
 <style lang="scss">
   .badge {
