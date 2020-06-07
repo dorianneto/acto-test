@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div v-if="result" class="alert alert-dismissible fade show" v-bind:class="alertMatchResult">
+    <div v-if="result" class="alert alert-dismissible fade show mt-3" v-bind:class="alertMatchResult">
       <h4 class="alert-heading">Match result:</h4>
       <ul>
         <li>Your score: {{ result.scores.user }}</li>

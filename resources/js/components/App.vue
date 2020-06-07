@@ -1,13 +1,20 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <game v-on:update-leadboard="onUpdateLeadboard"></game>
+  <div id="application">
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <game v-on:update-leadboard="onUpdateLeadboard"></game>
+          </div>
+          <div class="col-12 col-md-8">
+            <leadboard :key="componentKey"></leadboard>
+          </div>
+        </div>
       </div>
-      <div class="col-md-8">
-        <leadboard :key="componentKey"></leadboard>
-      </div>
-    </div>
+    </main>
+    <footer>
+      <p>Built with ♥ by <a href="https://dorianneto.com.br/" target="_blank">Dorian Neto</a></p>
+    </footer>
   </div>
 </template>
 
@@ -30,3 +37,26 @@
     }
   }
 </script>
+
+<stylel lang="scss">
+  #application {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+
+    main {
+      .container {
+        .row {
+          & > div {
+            margin: 20px 0;
+          }
+        }
+      }
+    }
+
+    footer {
+      text-align: center;
+    }
+  }
+</stylel>

@@ -3,25 +3,27 @@
     <div class="card-header">Leadboard</div>
 
     <div class="card-body">
-      <table class="table">
-        <caption>Last update at {{ updatedAtFormatted }}</caption>
-        <thead>
-          <tr>
-            <th width="15%">Rank</th>
-            <th>Name</th>
-            <th>Matches</th>
-            <th>Wins</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, index) in data" :key="index">
-            <td>{{ index+1 }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.total_matches }}</td>
-            <td>{{ item.total_wins }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table">
+          <caption>Last update at {{ updatedAtFormatted }}</caption>
+          <thead>
+            <tr>
+              <th width="15%">Rank</th>
+              <th>Name</th>
+              <th>Matches</th>
+              <th>Wins</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in data" :key="index">
+              <td>{{ index+1 }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.total_matches }}</td>
+              <td>{{ item.total_wins }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
