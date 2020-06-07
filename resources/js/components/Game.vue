@@ -24,7 +24,7 @@
                 <li v-for="error in errors.hand">{{ error }}</li>
               </ul>
             </div>
-            <small class="form-text text-muted">Only these cards are allowed: 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A</small>
+            <small class="form-text text-muted">Cards allowed: 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A</small>
           </div>
           <button @click="play" type="button" class="btn btn-primary">Play!</button>
         </form>

@@ -1,8 +1,11 @@
 <template>
   <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-4">
         <game></game>
+      </div>
+      <div class="col-md-8">
+        <Leadboard></Leadboard>
       </div>
     </div>
   </div>

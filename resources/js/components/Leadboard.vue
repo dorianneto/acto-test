@@ -1,16 +1,46 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Leadboard</div>
-                </div>
-            </div>
-        </div>
+  <div class="card">
+    <div class="card-header">Leadboard</div>
+
+    <div class="card-body">
+      <table class="table">
+        <caption>Leadboard up to date at </caption>
+        <thead>
+          <tr>
+            <th width="15%">Rank</th>
+            <th>Name</th>
+            <th>Matches</th>
+            <th>Wins</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in data" :key="index">
+            <td>{{ index+1 }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.total_matches }}</td>
+            <td>{{ item.total_wins }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 </template>
 
 <script>
-    export default {
+  import api from '../services/api.js';
+
+  export default {
+    data: () => ({
+      data: []
+    }),
+    mounted: async function () {
+      await api.get('leadboard')
+        .then(response => {
+          this.data = response.data;
+        })
+        .catch(error => {
+          alert(error);
+        });
     }
+  }
 </script>
