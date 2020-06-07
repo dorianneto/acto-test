@@ -45,6 +45,7 @@ class ResultRepository
                     CAST(SUM(user_win) as UNSIGNED) as total_wins
                 ')
                 ->groupBy('name')
+                ->orderBy('total_wins', 'desc')
                 ->get();
         } catch (\Exception $e) {
             return null;
